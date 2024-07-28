@@ -1,0 +1,218 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+:root {
+    --back-element-color: rgb(30, 30, 30);
+}
+body {
+    background-color: #222831;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 110vh;
+    font-family: "Cairo", sans-serif;
+}
+.tic-tac-toe {
+    width: 540px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+/* Start turn */
+.turn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.xturn,
+.oturn {
+    width: 70px;
+    height: 70px;
+    background-color: var(--back-element-color);
+    margin-bottom: 15px;
+    border-radius: 10px;
+    position: relative;
+}
+.xturn::before,
+.xturn::after {
+    position: absolute;
+    content: "";
+    width: 85%;
+    height: 8px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    background-color: red;
+    box-shadow: 0 0 12px 0px rgb(202 0 0);
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+.xturn::after {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+.oturn::before {
+    content: "";
+    position: absolute;
+    width: 55%;
+    height: 55%;
+    background-color: transparent;
+    border-radius: 50%;
+    border: 8px solid #00bcd4;
+    left: 50%;
+    top: 50%;
+    box-shadow: 0 0 12px 0px #009688, inset 0 0 10px #009688;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease-in-out;
+}
+
+/* End turn */
+/* Start game */
+.game {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 10px;
+    width: 320px;
+}
+.square {
+    width: 100px;
+    height: 100px;
+    background-color: var(--back-element-color);
+    border: 2px solid white;
+    cursor: pointer;
+    border-radius: 5px;
+    position: relative;
+}
+@media (max-width: 550px) {
+    .four {
+        grid-template-columns: repeat(4, 72px);
+        width: 320px !important;
+        height: 320px !important;
+    }
+    .four-square {
+        width: 72px;
+        height: 72px;
+    }
+    .five {
+        grid-template-columns: repeat(5, 60px);
+        width: 320px !important;
+        height: 320px !important;
+        gap: 5px;
+    }
+    .five-square {
+        width: 60px;
+        height: 60px;
+    }
+}
+/* End game */
+/* Start size */
+.game-size {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 10px;
+}
+.size {
+    font-size: 18px;
+    color: white;
+    border: 2px solid;
+    text-align: center;
+    padding: 0px 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-family: "Cairo", sans-serif;
+    background-color: var(--back-element-color);
+}
+.size:hover {
+    color: #00bcd4;
+    border: 2px solid #00bcd4;
+    box-shadow: 0 0 10px 0px #009688, inset 0 0 7px #009688;
+    transition: all 0.3s;
+}
+/* End size */
+
+/* turn off light */
+.turn-off::after,
+.turn-off::before {
+    filter: grayscale(1);
+    box-shadow: none;
+}
+/* X and O on board */
+.x::after,
+.x::before {
+    position: absolute;
+    content: "";
+    width: 70%;
+    height: 8px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    background-color: red;
+    box-shadow: 0 0 12px 0px rgb(202 0 0);
+    border-radius: 5px;
+}
+.x::after {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+.o::after {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    background-color: transparent;
+    border-radius: 50%;
+    border: 8px solid #00bcd4;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 12px 0px #009688, inset 0 0 10px #009688;
+}
+/* Start win message */
+#winMessage {
+    position: absolute;
+    background-color: #1e1e1e;
+    padding: 30px;
+    width: 50%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    color: white;
+    border-radius: 10px;
+}
+#winMessage p {
+    font-size: 30px;
+}
+#winMessage p span {
+    font-size: 35px;
+}
+@media (max-width: 700px) {
+    #winMessage {
+        width: 90%;
+        height: 30%;
+    }
+}
+/* End win message */
+/* Start restart button */
+#restart,
+#new-game {
+    background: var(--back-element-color);
+    color: white;
+    border: solid 2px;
+    padding: 10px 20px;
+    margin-top: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+#restart:hover {
+    color: rgb(255, 58, 58);
+    border: 2px solid #fe2f2f;
+    box-shadow: 0 0 10px 0px rgb(208 3 3), inset 0 0 7px rgb(212 3 3);
+    transition: all 0.3s;
+}
+/* End restart button */
