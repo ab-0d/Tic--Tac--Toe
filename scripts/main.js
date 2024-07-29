@@ -89,6 +89,7 @@ function game(size) {
                 currentPlayer = "x";
             }
             checkWinner(size);
+            checkDraw();
         });
     });
     setWinConditions(size);
@@ -97,33 +98,7 @@ game(3);
 // function to set winning conditions based
 function setWinConditions(size) {
     if (+size === 5) {
-        gameState = [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-        ];
+        gameState = ["","","","","","","","","","","","","","","","","","","","","","","","",""];
         winConditions = [
             [0, 1, 2, 3, 4],
             [5, 6, 7, 8, 9],
@@ -139,24 +114,7 @@ function setWinConditions(size) {
             [4, 8, 12, 16, 20],
         ];
     } else if (+size === 4) {
-        gameState = [
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-        ];
+        gameState = ["","","","","","","","","","","","","","","",""];
         winConditions = [
             [0, 1, 2, 3],
             [4, 5, 6, 7],
@@ -184,6 +142,7 @@ function setWinConditions(size) {
     }
 }
 // function to check the winner based on the game size
+let win;
 function checkWinner(size) {
     +size !== 4 && +size !== 5 ? (size = 3) : size;
     const winningLength = +size;
@@ -193,7 +152,7 @@ function checkWinner(size) {
 
         if (firstValue === "") continue;
 
-        let win = true;
+        win = true;
         for (let j = 1; j < winningLength; j++) {
             if (gameState[indices[j]] !== firstValue) {
                 win = false;
@@ -214,7 +173,6 @@ function restart() {
     defualtGameSize();
     setBoardSize(0);
     gmaeContainer.classList.remove(gmaeContainer.classList[1]);
-
     game(0);
     setWinConditions(0);
     xturnLogo.classList.remove("turn-off");
@@ -235,8 +193,38 @@ function winMessage(playerWinner) {
     text.textContent = ` WIN : `;
     text.appendChild(span);
     button.innerHTML = "New Game";
-    div.id = "winMessage";
+    div.id = "win-message";
     div.appendChild(text);
+    div.appendChild(button);
+    document.body.appendChild(div);
+    // new game button
+    let newGame = document.querySelector("#new-game");
+    newGame.addEventListener("click", () => {
+        restart();
+        div.remove();
+        gmaeContainer.style.pointerEvents = "auto";
+    });
+}
+// function to check the draw 
+function checkDraw() {
+    let che = gameState.filter((s) => {
+        return s == "";
+    });
+    if (che.length == 0 && win == false) {
+        drawMessage();
+    }
+}
+// function to display the draw message
+function drawMessage() {
+    gmaeContainer.style.pointerEvents = "none";
+    let div = document.createElement("div");
+    let span = document.createElement("span");
+    let button = document.createElement("button");
+    button.id = "new-game";
+    span.textContent = "Draw!";
+    button.innerHTML = "New Game";
+    div.id = "draw-message";
+    div.appendChild(span);
     div.appendChild(button);
     document.body.appendChild(div);
     // new game button

@@ -87,6 +87,9 @@ body {
     position: relative;
 }
 @media (max-width: 550px) {
+    body {
+        height: 100vh;
+    }
     .four {
         grid-template-columns: repeat(4, 72px);
         width: 320px !important;
@@ -172,7 +175,8 @@ body {
     box-shadow: 0 0 12px 0px #009688, inset 0 0 10px #009688;
 }
 /* Start win message */
-#winMessage {
+#win-message,
+#draw-message {
     position: absolute;
     background-color: #1e1e1e;
     padding: 30px;
@@ -185,14 +189,18 @@ body {
     color: white;
     border-radius: 10px;
 }
-#winMessage p {
+#win-message p {
     font-size: 30px;
 }
-#winMessage p span {
+#draw-message span {
+    font-size: 35px;
+}
+#win-message p span {
     font-size: 35px;
 }
 @media (max-width: 700px) {
-    #winMessage {
+    #win-message,
+    #draw-message {
         width: 90%;
         height: 30%;
     }
